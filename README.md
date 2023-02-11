@@ -8,15 +8,17 @@
 
 ## Overview
 
-The NFL Draft is the most important way to acquire talented players. I am going to give any prespective team insight into which players get selected on the first 2 days of the draft (rounds 1-3) where the majority of NFL starters are found, which players get selected on day 3 (rounds 4-7) and which players will be undrafted.
+The NFL Draft is the most important process in acquiring talented players. 
 
-My data was web scraped from sports-reference.com and merged with the NFL_data Python package.
+I am going to give any prespective team insight into when players will be selected.
 
-Combine athletic testing data played a key role in helping separate where in the draft players are selected, especially weight adjusted statistics that I feature engineered.
+The combine and college stats data was web scraped from sports-reference.com. The scouting reports and draft grades were taken from ESPN.
 
-Offensive stats carry a strong weight than defensive stats in separating the draft rounds of players. The final season of a players' career was more important than their career stats with QB being an exception.
+The length of the scouting report is a decent indicator of where in the draft a player will be taken.
 
-It was easier to separate drafted players from undrafted players, than day 1 or 2 players from day 3 players.
+Overall player rank and draft grade were by far the most important features in determining where a player will get selected. This not surprising at all as teams are trying to pick the best players. 
+
+My model was better at predicting the first round of the draft than any other round.
 
 ## Business Problem
 
@@ -26,9 +28,11 @@ While there are several applications to classifying which day a player will get 
 
 ## Data
 
-The majority of my data was web scraped from sports-reference.com. Having scrapped very similar data from sports-reference before, I did not run into nearly as many issues as the first time. However one major obstacle I have yet to overcome is how to get the secondary statistics for a player. For example for QBs I only have their passing data but not their rushing information. While this is obviously not ideal, the addition of the combine testing data should help offset the loss of rushing information.
+The combine and college stats data was web scraped from sports-reference.com. One major obstacle in scraping sports-reference is the secondary statistics for a player appear to be unscrapable. For example for QBs I only have their passing data but not their rushing information. While this is obviously not ideal, the addition of the combine testing data and scouting reports should help offset the loss of secondary information.
 
 I used a sleep-timer of 3.15 to adhere to sports-references web scraping restrictions. They do update their page so I proved the link here https://www.sports-reference.com/bot-traffic.html in case anyone trying to replicate this process runs into any 429 HTTP Error requests.
+
+To get 
 
 Additionally, I supplemented the sportsreference data with the NFL_data Python package for a few extra features.
 
