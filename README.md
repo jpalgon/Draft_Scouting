@@ -2,7 +2,7 @@
 
 # **Author**: Josh Palgon
 
-![mock](./Images/mock22.jpeg)
+![mock](./Images/mock22.jpg)
 
 
 ## Overview
