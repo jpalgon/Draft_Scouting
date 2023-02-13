@@ -2,7 +2,7 @@
 
 # **Author**: Josh Palgon
 
-![Combine](./Images/Combine.png)
+![mock](./Images/mock22.png)
 
 
 ## Overview
@@ -58,7 +58,7 @@ The Random Forest, Decision Tree, XGBoost, and KNN models all performed fairly w
 ## Evaluation
 
 ### Top Correlated Features with Pick
-![Corr](./Images/Corr.png)
+![Corr](./Images/corr.png)
 
 All 3 features I engineered were towards the top including speed being the top metric. More top offensive than defensive stats. Final season stats appeared instead of career stats except for QB stats.
 
