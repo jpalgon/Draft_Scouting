@@ -44,35 +44,44 @@ For my modeling I separated my numeric columns from my categorical columns. On m
 I ran 7 different models:
 - Linear Regression
 - Decision Tree Regressor
-- Random Forest Regressor
+- Random Forest Regressor (with CountVectorizer and TFIDF)
 - KNN Regressor
 - XGBoost Regressor
 - ADABoost Regressor
-- Gradient Boost Regressor
+- Gradient Boost Regressor (with CountVectorizer and TFIDF)
 
-### Random Forest Matrix
-![Matrix](./Images/matrix.png)
+### Gradient Boost Regressor Plot
+![R2](./Images/r2.png)
 
-The Random Forest, Decision Tree, XGBoost, and KNN models all performed fairly well with an accuracy range of .55 to .63 and all did very well at classifying undrafted players. The Random Forest had the second best recall score for class 0 but the highest f1, recall, and precision scores for every other class metric combination along with the best accuracy so it was the clear winner.
+The Random Forest, XGBoost, ADABoost and Gradient Boost models all performed fairly well with a R Squared of 0.66 - 0.68. The Gradient Boost Model had the highest R2 and the lowest Mean Squared Error so I chose it as my best model.
 
 ## Evaluation
 
 ### Top Correlated Features with Pick
 ![Corr](./Images/corr.png)
 
-All 3 features I engineered were towards the top including speed being the top metric. More top offensive than defensive stats. Final season stats appeared instead of career stats except for QB stats.
+Overall rank and grade are the clear top correlated features. 
 
-### QB Athletic Testing
-![QB Bench Reps](./Images/qbbench.png)
-![QB Speed](./Images/qbspeed.png)
+### Overall Rank
+![Overall Rank](./Images/ovr_rank.png)
 
-While bench reps wasn't actually super important overall it did help distinguish between drafted and undrafted players for QBs. However the speed score helped separate the round 1-3 QBs from the rest of the group.
+Clear linear relationship with the better ranked players get drafted in the earlier rounds.
 
-### OL Athletic Testing
-![OL Speed](./Images/olspeed.png)
-![OL Agility](./Images/olagility.png)
+### Report Length
+![Lenght of Report](./Images/len.png)
 
-Even though OL do not have any college statistics I could use, it did have some very important athletic testing scores. Both the speed shuttle agility scores were the best for the day 1 picks, the worst for undrafted OL and in the middle but still separated from both for the day 3 OL.
+The longer the scouting report, the more likely a player will be taken earlier in the draft.
+
+### Important Words
+![Elite](./Images/elite.png)
+![Great](./Images/great.png)
+![Good](./Images/good.png)
+![Average](./Images/average.png)
+![Starter](./Images/starter.png)
+![Project](./Images/project.png)
+![Lack](./Images/lack.png)
+
+Elite and great help separate round 1 from round 2 and those from the rest of the draft. Good and starter helps find players likely to be taken in rounds 1-3. Average and project show up more in the middle rounds with round 4 being the most frequent. Lack is most common at the end of the draft and is most frequent in round 5.
 
 ## Conclusions
 
@@ -88,7 +97,7 @@ My model can be very useful for predicting whether a player will be drafted or n
 Get more data
 - Advanced stats
 - Non Primary Stats
-- Medical information? (not sure how well good medical data for college prospects would be)
+- Medical information? (not sure how to find good medical data for college prospects)
 - Take team needs and draft order into account
 
 ## What I learned
@@ -99,7 +108,7 @@ You can never spend too much time cleaning and doing EDA. While I don't think my
 
 ## For More Information
 
-Please look at my full analysis in [my Jupyter Notebooks](https://github.com/jpalgon/draft_scouting) or my [presentation](./ScoutingCombine.pdf).
+Please look at my full analysis in [my Jupyter Notebooks](https://github.com/jpalgon/draft_scouting) or my [presentation](./Draft_Scouting.pdf).
 
 For any additional questions, please contact:
 
