@@ -5,7 +5,7 @@
 
 # ### Import Relevant Libraries
 
-# In[1]:
+# In[ ]:
 
 
 import pandas as pd
@@ -34,31 +34,31 @@ import streamlit as st
 
 # ### Read in the Data
 
-# In[181]:
+# In[ ]:
 
 
 df = pd.read_parquet('./Data/mockdraft.parquet')
 
 
-# In[182]:
+# In[ ]:
 
 
 df.reset_index(inplace=True)
 
 
-# In[183]:
+# In[ ]:
 
 
 df.drop(['index'],axis=1,inplace=True)
 
 
-# In[184]:
+# In[ ]:
 
 
 df['year_col'] = df.year_col.astype('Int64')
 
 
-# In[176]:
+# In[ ]:
 
 
 st.title('NFL Mock Draft Simulator')
@@ -90,7 +90,7 @@ year = st.selectbox('Select Year:',
 
 # ### Create Mock Draft
 
-# In[198]:
+# In[ ]:
 
 
 if st.button('Mock Draft'):
@@ -153,14 +153,14 @@ if st.button('Mock Draft'):
     mock_draft_year = results.sort_values(by=0)
     mock_draft_year['Actual_Pick'] = mock_draft_year[1] + 1
     mock_draft_year['Diff'] = (mock_draft_year[0] - mock_draft_year.Actual_Pick).abs() 
-    mock = mock_draft_year[['player_col','Round_col', 'Actual_Pick',0,'Diff','ovr_rk_col']].reset_index()
-    mock = mock[['player_col','Round_col', 'Actual_Pick',0,'Diff','ovr_rk_col']]
-    mock.columns = ['Player','Drafted_Round','Actual_Pick','Predicted_Pick','Difference','Overall_Rank']
+    mock = mock_draft_year[['player_col','Round_col', 'Actual_Pick',0,'Diff','ovr_rk_col','pos_col']].reset_index()
+    mock = mock[['player_col','Round_col', 'Actual_Pick',0,'Diff','ovr_rk_col','pos_col']]
+    mock.columns = ['Player','Drafted_Round','Actual_Pick','Predicted_Pick','Difference','Overall_Rank','Pos']
     mock['Predicted_Pick'] = round(mock['Predicted_Pick'],2)
     mock['Difference'] = round(mock.Difference,2)
     mock['Mock_Pick'] = range(1, len(mock) + 1)
     mock['Mock_Difference'] = round(mock.Mock_Pick - mock.Actual_Pick,2)
-    final = mock[['Player','Mock_Pick','Actual_Pick','Predicted_Pick','Difference','Mock_Difference','Drafted_Round']]
+    final = mock[['Player','Pos','Actual_Pick','Predicted_Pick','Difference','Drafted_Round']]
     final = final.style.background_gradient(cmap='rocket',subset='Difference').set_precision(2)
     with st.spinner('Simulating...'):
         time.sleep(1)
