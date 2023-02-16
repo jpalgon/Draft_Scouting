@@ -81,6 +81,12 @@ The longer the scouting report, the more likely a player will be taken earlier i
 
 Elite and great help separate round 1 from round 2 and those from the rest of the draft. Good and starter helps find players likely to be taken in rounds 1-3. Average and project show up more in the middle rounds with round 4 being the most frequent. Lack is most common at the end of the draft and is most frequent in round 5. All of this lines up with what would be expected.
 
+## Mock Draft
+
+The final product of this project is a [Mock Draft Simulator](https://jpalgon-draft-scouting-mock-draft-simulator-rlsofe.streamlit.app/). This allows the user to select a year between 2005 and 2022 and it will run a mock draft for that year. The train data for a given year is all the players not taken in that year and the test set is the given year. Because the train set is larger in the mock draft than in my modeling the mock drafts performed better than my best model using a 0.67 and 0.33 train test split. The R Squared for the mock drafts were around 0.75.
+
+Talented players who had large medical or off the field concerns is something my mock draft had a hard / impossible time accounting for and resulted in some of the larger misses.
+
 ## Conclusions
 
 Overall Rank is the by far the most important feature in determining the pick number of a player. Grade while very similar to rank doesn't provide as much separation as rank so while a strong predictor isn't nearly as important.
@@ -103,7 +109,7 @@ As the years go by and my database of drafts increases, I am hoping to get some 
 
 ## For More Information
 
-Please look at my full analysis in [my Jupyter Notebooks](./Notebooks) or my [presentation](./Draft_Scouting.pdf).
+Please look at my full analysis in [my Jupyter Notebooks](./Notebooks) my [presentation](./Draft_Scouting.pdf) or my [Mock Draft](https://jpalgon-draft-scouting-mock-draft-simulator-rlsofe.streamlit.app/).
 
 For any additional questions, please contact:
 
