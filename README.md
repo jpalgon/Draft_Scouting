@@ -7,7 +7,7 @@
 
 ## Overview
 
-The NFL Draft is the most important process in acquiring talented players. I am going to give any prespective team insight into when players will be selected.
+The NFL Draft is the most important process in acquiring talented players. I am going to give any NFL GM / decision maker insight into when players will be selected.
 
 I will be building upon the [Draft Combine](https://github.com/jpalgon/Draft_Stats) project I already completed.
 
