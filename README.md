@@ -79,7 +79,7 @@ The longer the scouting report, the more likely a player will be taken earlier i
 ![Project](./Images/project.png)
 ![Lack](./Images/lack.png)
 
-Elite and great help separate round 1 from round 2 and those from the rest of the draft. Good and starter helps find players likely to be taken in rounds 1-3. Average and project show up more in the middle rounds with round 4 being the most frequent. Lack is most common at the end of the draft and is most frequent in round 5.
+Elite and great help separate round 1 from round 2 and those from the rest of the draft. Good and starter helps find players likely to be taken in rounds 1-3. Average and project show up more in the middle rounds with round 4 being the most frequent. Lack is most common at the end of the draft and is most frequent in round 5. All of this lines up with what would be expected.
 
 ## Conclusions
 
