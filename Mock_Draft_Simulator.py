@@ -95,7 +95,7 @@ year = st.selectbox('Select Year:',
 
 if st.button('Mock Draft'):
     with st.spinner('Simulating...'):
-        time.sleep(60)
+        #time.sleep(60)
     year = year
     
     # Implement Random Forest Model (best for Mock Drafting)
