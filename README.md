@@ -37,8 +37,6 @@ Additionally, I supplemented the sportsreference data with the NFL_data Python p
 
 ## Modeling
 
-Knowing that not all athletic testing results are the same across positions and body types. I did feature engineering to create 3 scores (speed, cone agility, and shuttle agility) that factors weight into the 40 yard dash, 3 cone drill, and shuttle run. The speed score was created by Bill Barnwell in 2008. Since shuttle run times were on a similar scale to the 40 yard dash I just replaced the 40 yard dash time of his equation with the shuttle run times. 3 cone drill was slightly larger so I slightly tinkered with the formula to try and put 3 cone drill on the same scale as the 40 year dash and shuttle run. 
-
 For my modeling I separated my numeric columns from my categorical columns. On my categorical columns, I OneHotEncoded them. On my numerical columns, I used a simple imputer to handle the NaNs and impute 0 as any NaN should be 0 anyway based on how I scraped my data. Additionally, I used a StandardScaler on the numerical data.
 
 I ran 7 different models:
@@ -53,7 +51,7 @@ I ran 7 different models:
 ### Gradient Boost Regressor Plot
 ![R2](./Images/r2.png)
 
-The Random Forest, XGBoost, ADABoost and Gradient Boost models all performed fairly well with a R Squared of 0.66 - 0.68. The Gradient Boost Model had the highest R2 and the lowest Mean Squared Error so I chose it as my best model.
+The Random Forest, XGBoost, ADABoost and Gradient Boost models all performed fairly well with a R Squared of 0.67 - 0.69. Additionally for the Gradient Boost and Random Forest, I did one set using CountVectorizer for the words in the scouting reports and another with TFIDF. The Gradient Boost Model with CountVectorizer on scouting reports had the highest R2 and the lowest Mean Squared Error so I chose it as my best model. 
 
 ## Evaluation
 
@@ -85,12 +83,11 @@ Elite and great help separate round 1 from round 2 and those from the rest of th
 
 ## Conclusions
 
+Overall Rank is the by far the most important feature in determining the pick number of a player. Grade while very similar to rank doesn't provide as much separation as rank so while a strong predictor isn't nearly as important.
 
-Combine athletic testing can be a very good separator for the day a player will be drafted especially when weight is combined with a speed or agility test.
+The scouting reports and more important combine stats (40 yard dash, broad jump, speed score, and agility score) seem to weigh a bit heavier on where a player will get drafted than the basic college stats do. However there are a few offensive stats that carry some weight (scrimmage yards and tds in the season of the draft, and qb rating and yards per attempt for their careers). 
 
-Offensive college stats bear more weight than defensive stats while the final year of a college career is more important than the career college statistics with QBs being an exception.
-
-My model can be very useful for predicting whether a player will be drafted or not which would be of great interest to NFL teams in day 3 of the draft.
+My model is very good at predicting players in the first round. Considering how important trading in the first round is, this is a very good development and can be a useful tool for a GM for the draft.
 
 ## Next steps:
 
@@ -100,11 +97,9 @@ Get more data
 - Medical information? (not sure how to find good medical data for college prospects)
 - Take team needs and draft order into account
 
-## What I learned
+Run my model on the 2023 draft to predict it before the 2023 draft happens. The combine will conclude at the beginning of March and the updated scouting reports should be available shortly after that. By mid-late March, I should have all the information I need to make a 2023 mock draft.
 
-
-
-You can never spend too much time cleaning and doing EDA. While I don't think my results would have been drastically different, there were a few areas I wish I had more time to spend on (college conference had missing values I could have gotten had I not needed to keep pushing on). Additionally, I would have loved to spend more time thinking about and trying feature engineering especially considering the success I had with the 3 ones I used in this project.
+As the years go by and my database of drafts increases, I am hoping to get some better scores as well.
 
 ## For More Information
 
