@@ -95,78 +95,77 @@ year = st.selectbox('Select Year:',
 
 if st.button('Mock Draft'):
     with st.spinner('Simulating...'):
-        #time.sleep(60)
-    year = year
-    
-    # Implement Random Forest Model (best for Mock Drafting)
-    X = df.drop(['Pick_col'],axis=1)
-    label_encoder = LabelEncoder()
+      year = year
 
-    X_train = X[X.year_col != year]
-    X_test = X[X.year_col == year]
-    y_train = label_encoder.fit_transform(df.Pick_col[df.year_col != year])
-    y_test = label_encoder.fit_transform(df.Pick_col[df.year_col == year])
+      # Implement Random Forest Model (best for Mock Drafting)
+      X = df.drop(['Pick_col'],axis=1)
+      label_encoder = LabelEncoder()
 
-    player_name = X_test.player_col
-    player_year = X_test.year_col
-    player_round = X_test.Round_col
-    player_target = X_test.target_col
-    player_pos = X_test.pos_col
+      X_train = X[X.year_col != year]
+      X_test = X[X.year_col == year]
+      y_train = label_encoder.fit_transform(df.Pick_col[df.year_col != year])
+      y_test = label_encoder.fit_transform(df.Pick_col[df.year_col == year])
 
-    X_train.drop(['player_col','year_col','Round_col','target_col'],axis=1,inplace=True)
-    X_test.drop(['player_col','year_col','Round_col','target_col'],axis=1,inplace=True)
+      player_name = X_test.player_col
+      player_year = X_test.year_col
+      player_round = X_test.Round_col
+      player_target = X_test.target_col
+      player_pos = X_test.pos_col
 
-    num_cols = X_train.select_dtypes(['Int64','float64'])
-    cat_cols = X_train.select_dtypes('object')
+      X_train.drop(['player_col','year_col','Round_col','target_col'],axis=1,inplace=True)
+      X_test.drop(['player_col','year_col','Round_col','target_col'],axis=1,inplace=True)
 
-    num_transformer = Pipeline(steps=[('ss',StandardScaler()),
-                                 ('impute',SimpleImputer(strategy='constant'))])
+      num_cols = X_train.select_dtypes(['Int64','float64'])
+      cat_cols = X_train.select_dtypes('object')
 
-    cat_transformer = Pipeline(steps=[('ohe',OneHotEncoder(drop='first',sparse=False,handle_unknown='ignore'))])
+      num_transformer = Pipeline(steps=[('ss',StandardScaler()),
+                                   ('impute',SimpleImputer(strategy='constant'))])
 
-    transformer = ColumnTransformer(transformers=[
-        ('num',num_transformer,num_cols.columns),
-        ('cat',cat_transformer,cat_cols.columns)
-    ])
+      cat_transformer = Pipeline(steps=[('ohe',OneHotEncoder(drop='first',sparse=False,handle_unknown='ignore'))])
 
-    # Pipeline for transformations, sampling and the model
-    rfc_pipe = Pipeline([
-        ('transformer',transformer),
-        ('sample',None),
-        ('forest',RandomForestRegressor())
-    ])
+      transformer = ColumnTransformer(transformers=[
+          ('num',num_transformer,num_cols.columns),
+          ('cat',cat_transformer,cat_cols.columns)
+      ])
 
-    grid = {
-        'sample':[RandomOverSampler(random_state=42),SMOTE(random_state=42)],
-        'forest__n_estimators':[102],
-        'forest__max_depth':[24],
-        'forest__min_samples_split':[2],
-        'forest__min_samples_leaf':[6]
-    }
+      # Pipeline for transformations, sampling and the model
+      rfc_pipe = Pipeline([
+          ('transformer',transformer),
+          ('sample',None),
+          ('forest',RandomForestRegressor())
+      ])
 
-    forest = GridSearchCV(estimator=rfc_pipe,
-                              param_grid=grid,
-                              cv=5)
-    forest.fit(X_train, y_train)
+      grid = {
+          'sample':[RandomOverSampler(random_state=42),SMOTE(random_state=42)],
+          'forest__n_estimators':[102],
+          'forest__max_depth':[24],
+          'forest__min_samples_split':[2],
+          'forest__min_samples_leaf':[6]
+      }
 
-    y_pred = forest.predict(X_test)
+      forest = GridSearchCV(estimator=rfc_pipe,
+                                param_grid=grid,
+                                cv=5)
+      forest.fit(X_train, y_train)
 
-    results = pd.concat([player_name.reset_index(),player_round.reset_index(),player_year.reset_index(),X_test.reset_index(),pd.Series(y_pred),pd.Series(y_test)],axis=1)
-    mock_draft_year = results.sort_values(by=0)
-    mock_draft_year['Actual_Pick'] = mock_draft_year[1] + 1
-    mock_draft_year['Diff'] = (mock_draft_year[0] - mock_draft_year.Actual_Pick).abs() 
-    mock = mock_draft_year[['player_col','Round_col', 'Actual_Pick',0,'Diff','ovr_rk_col','pos_col']].reset_index()
-    mock = mock[['player_col','Round_col', 'Actual_Pick',0,'Diff','ovr_rk_col','pos_col']]
-    mock.columns = ['Player','Drafted_Round','Actual_Pick','Predicted_Pick','Difference','Overall_Rank','Pos']
-    mock['Predicted_Pick'] = round(mock['Predicted_Pick'],2)
-    mock['Difference'] = round(mock.Difference,2)
-    mock['Mock_Pick'] = range(1, len(mock) + 1)
-    mock['Mock_Difference'] = round(mock.Mock_Pick - mock.Actual_Pick,2)
-    final = mock[['Player','Pos','Actual_Pick','Predicted_Pick','Difference','Drafted_Round']]
-    final = final.style.background_gradient(cmap='gist_heat',subset='Difference').set_precision(2)
-    
-    
-    st.write(final)
+      y_pred = forest.predict(X_test)
+
+      results = pd.concat([player_name.reset_index(),player_round.reset_index(),player_year.reset_index(),X_test.reset_index(),pd.Series(y_pred),pd.Series(y_test)],axis=1)
+      mock_draft_year = results.sort_values(by=0)
+      mock_draft_year['Actual_Pick'] = mock_draft_year[1] + 1
+      mock_draft_year['Diff'] = (mock_draft_year[0] - mock_draft_year.Actual_Pick).abs() 
+      mock = mock_draft_year[['player_col','Round_col', 'Actual_Pick',0,'Diff','ovr_rk_col','pos_col']].reset_index()
+      mock = mock[['player_col','Round_col', 'Actual_Pick',0,'Diff','ovr_rk_col','pos_col']]
+      mock.columns = ['Player','Drafted_Round','Actual_Pick','Predicted_Pick','Difference','Overall_Rank','Pos']
+      mock['Predicted_Pick'] = round(mock['Predicted_Pick'],2)
+      mock['Difference'] = round(mock.Difference,2)
+      mock['Mock_Pick'] = range(1, len(mock) + 1)
+      mock['Mock_Difference'] = round(mock.Mock_Pick - mock.Actual_Pick,2)
+      final = mock[['Player','Pos','Actual_Pick','Predicted_Pick','Difference','Drafted_Round']]
+      final = final.style.background_gradient(cmap='gist_heat',subset='Difference').set_precision(2)
+
+
+      st.write(final)
 
 
 # In[ ]:
