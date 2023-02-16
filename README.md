@@ -33,7 +33,7 @@ I used a sleep-timer of 3.15 to adhere to sports-references web scraping restric
 
 To get the scouting reports from 2005-2021 I used a data set I found by [Jack Lichtenstein](https://www.kaggle.com/datasets/jacklichtenstein/espn-nfl-draft-prospect-data). I tried to scrape ESPN for the 2022 draft but the website was not scrapable so I just copied all the reports into an excel file as it was easy to copy for only one year.
 
-Additionally, I supplemented the sportsreference data with the NFL_data Python package for a few extra features.
+Additionally, I supplemented the sportsreference data with the [NFL_data Python package](https://pypi.org/project/nfl-data-py/) for a few extra features.
 
 ## Modeling
 
