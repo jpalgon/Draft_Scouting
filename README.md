@@ -103,7 +103,7 @@ As the years go by and my database of drafts increases, I am hoping to get some 
 
 ## For More Information
 
-Please look at my full analysis in [my Jupyter Notebooks](https://github.com/jpalgon/draft_scouting) or my [presentation](./Draft_Scouting.pdf).
+Please look at my full analysis in [my Jupyter Notebooks](https://github.com/jpalgon/draft_scouting/Notebooks) or my [presentation](./Draft_Scouting.pdf).
 
 For any additional questions, please contact:
 
