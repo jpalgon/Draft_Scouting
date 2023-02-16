@@ -94,6 +94,8 @@ year = st.selectbox('Select Year:',
 
 
 if st.button('Mock Draft'):
+    with st.spinner('Simulating...'):
+        time.sleep(60)
     year = year
     
     # Implement Random Forest Model (best for Mock Drafting)
@@ -162,8 +164,7 @@ if st.button('Mock Draft'):
     mock['Mock_Difference'] = round(mock.Mock_Pick - mock.Actual_Pick,2)
     final = mock[['Player','Pos','Actual_Pick','Predicted_Pick','Difference','Drafted_Round']]
     final = final.style.background_gradient(cmap='gist_heat',subset='Difference').set_precision(2)
-    with st.spinner('Simulating...'):
-        time.sleep(1)
+    
     
     st.write(final)
 
