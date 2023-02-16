@@ -5,7 +5,7 @@
 
 # ### Import Relevant Libraries
 
-# In[ ]:
+# In[1]:
 
 
 import pandas as pd
@@ -34,25 +34,25 @@ import streamlit as st
 
 # ### Read in the Data
 
-# In[ ]:
+# In[2]:
 
 
 df = pd.read_parquet('./Data/mockdraft.parquet')
 
 
-# In[ ]:
+# In[3]:
 
 
 df.reset_index(inplace=True)
 
 
-# In[ ]:
+# In[4]:
 
 
 df.drop(['index'],axis=1,inplace=True)
 
 
-# In[ ]:
+# In[5]:
 
 
 df['year_col'] = df.year_col.astype('Int64')
@@ -72,6 +72,7 @@ st.image('Images/simulator.png',use_column_width='always')
 st.sidebar.markdown("## Make a NFL Mock Draft")
 st.sidebar.caption("About This App:")
 st.sidebar.caption("Predict the NFL Draft for any year between 2005 and 2022")
+st.sidebar.caption("2023 will be available before the 2023 Draft")
 
 # Sidebar cont.
 st.sidebar.markdown("#### Created by Josh Palgon")
