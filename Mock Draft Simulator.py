@@ -198,7 +198,7 @@ if st.button('Mock Player'):
       X_train = X[X.player_info_col != player]
       X_test = X[X.player_info_col == player]
       y_train = label_encoder.fit_transform(df.Pick_col[df.player_info_col != player])
-      y_test = label_encoder.fit_transform(df.Pick_col[df.player_info_col == player])
+      y_test = df.Pick_col[df.player_info_col == player]
 
       player_name = X_test.player_col
       player_year = X_test.year_col
