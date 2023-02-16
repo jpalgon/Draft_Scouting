@@ -246,7 +246,7 @@ if st.button('Mock Player'):
 
       results = pd.concat([player_name.reset_index(),player_round.reset_index(),player_year.reset_index(),X_test.reset_index(),pd.Series(y_pred),pd.Series(y_test)],axis=1)
       mock_draft_year = results.sort_values(by=0)
-      mock_draft_year['Actual_Pick'] = y_test
+      mock_draft_year['Actual_Pick'] = df.Pick_col[df.player_info_col == player]
       mock_draft_year['Diff'] = (mock_draft_year[0] - mock_draft_year.Actual_Pick).abs() 
       mock = mock_draft_year[['player_col','Round_col', 'Actual_Pick',0,'Diff','ovr_rk_col','pos_col']].reset_index()
       mock = mock[['player_col','Round_col', 'Actual_Pick',0,'Diff','ovr_rk_col','pos_col']]
