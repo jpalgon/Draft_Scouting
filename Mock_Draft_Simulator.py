@@ -162,7 +162,7 @@ if st.button('Mock Draft'):
       mock['Mock_Pick'] = range(1, len(mock) + 1)
       mock['Mock_Difference'] = round(mock.Mock_Pick - mock.Actual_Pick,2)
       final = mock[['Player','Pos','Actual_Pick','Predicted_Pick','Difference','Drafted_Round']]
-      final = final.style.background_gradient(cmap='gist_heat',subset='Difference').set_precision(2)
+      #final = final.style.background_gradient(cmap='gist_heat',subset='Difference').set_precision(2)
 
 
       st.write(final)
